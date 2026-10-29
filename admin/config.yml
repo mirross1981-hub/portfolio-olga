@@ -17,13 +17,14 @@ collections:
             name: "works"
             widget: "list"
             fields:
-              - { label: "Название", name: "title", widget: "string" }
-              - { label: "Теги", name: "tag", widget: "string" }
-              - { label: "Описание", name: "description", widget: "text" }
-              - { label: "Обложка (путь к файлу)", name: "cover", widget: "string" }
+              - { label: "Название", name: "title", widget: "string", required: true }
+              - { label: "Теги", name: "tag", widget: "string", required: false }
+              - { label: "Описание", name: "description", widget: "text", required: false }
+              - { label: "Обложка (путь к файлу)", name: "cover", widget: "string", required: false }
               - label: "Экраны"
                 name: "screens"
                 widget: "list"
+                required: false
                 fields:
-                  - { label: "Путь к картинке", name: "src", widget: "string" }
-                  - { label: "Описание", name: "alt", widget: "string" }
+                  - { label: "Путь к картинке", name: "src", widget: "string", required: false }
+                  - { label: "Описание", name: "alt", widget: "string", required: false }
