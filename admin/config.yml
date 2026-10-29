@@ -26,4 +26,3 @@ collections:
                 widget: "list"
                 fields:
                   - { label: "Картинка", name: "src", widget: "image" }
-                  - { label: "Описание", name: "alt", widget: "string" }
