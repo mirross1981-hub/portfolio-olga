@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><h1>Ольга Савченко — <span class="title-second">UI/UX-дизайнер</span></h1></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <a class="logo" href="#">Ольга Савченко</a>
+    </header>
+
+    <main>
+        <section class="hero" id="about">
+            <div class="hero-main">
+                <h1>Ольга Савченко — UI/UX-дизайнер</h1>
+                <p>Проектирую понятные интерфейсы и визуальные истории для цифровых продуктов.</p>
+                <a class="button" href="mailto:hello@example.com">Написать</a>
+            </div>
+            <aside class="hero-side">
+                <nav class="panel panel-nav">
+                    <a href="#about">Обо мне</a>
+                    <a href="#works">Работы</a>
+                    <a href="#contacts">Контакты</a>
+                </nav>
+
+                <div class="panel panel-contacts" id="contacts">
+                    <h2>Контакты</h2>
+                    <a href="mailto:hello@example.com">hello@example.com</a>
+                    <a href="https://www.behance.net/" target="_blank" rel="noopener">Behance</a>
+                    <a href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
+                </div>
+            </aside>
+        </section>
+        <section class="works" id="works">
+            <h2>Работы</h2>
+            <div id="works-list"></div>
+        </section>
+
+        <section class="cta" id="cta">
+            <h2>Нужен сайт?</h2>
+            <p>Напишите — обсудим задачу, сроки и формат работы.</p>
+            <a class="button" href="mailto:hello@example.com">Написать</a>
+        </section>
+        <footer class="footer">
+            <p>© 2026 Ольга Савченко</p>
+        </footer>
+        <div class="popup" id="popup">
+            <div class="popup-overlay" data-close></div>
+            <div class="popup-window">
+                <button class="popup-close" type="button" data-close>Закрыть</button>
+                <div class="popup-content" id="popup-content"></div>
+            </div>
+        </div>
+        <script src="script.js"></script>
+</body>
+</html>
