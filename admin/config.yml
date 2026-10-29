@@ -20,9 +20,10 @@ collections:
               - { label: "Название", name: "title", widget: "string" }
               - { label: "Теги", name: "tag", widget: "string" }
               - { label: "Описание", name: "description", widget: "text" }
-              - { label: "Обложка", name: "cover", widget: "image" }
+              - { label: "Обложка (путь к файлу)", name: "cover", widget: "string" }
               - label: "Экраны"
                 name: "screens"
                 widget: "list"
                 fields:
-                  - { label: "Картинка", name: "src", widget: "image" }
+                  - { label: "Путь к картинке", name: "src", widget: "string" }
+                  - { label: "Описание", name: "alt", widget: "string" }
