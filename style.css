@@ -369,7 +369,58 @@ section,
     font-size: 40px;
   }
 }
+/* --- Новый адаптивный хедер --- */
+.site-header {
+  display: flex;
+  justify-content: space-between; /* Разносит логотип влево, а ссылки вправо */
+  align-items: center;
+  width: 100%;
+  padding: 24px 40px;
+  box-sizing: border-box;
+}
 
+.header-logo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffffff; /* Или твой основной цвет текста */
+  letter-spacing: 0.05em;
+}
+
+.header-links {
+  display: flex;
+  gap: 32px; /* Равные интервалы между ссылками */
+}
+
+.header-links a {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  color: #ffffff; /* Или твой основной цвет текста */
+  transition: opacity 0.3s ease;
+}
+
+.header-links a:hover {
+  opacity: 0.7;
+}
+
+/* Адаптив хедера для мобильных (ширина до 600px) */
+@media (max-width: 600px) {
+  .site-header {
+    padding: 16px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .header-links {
+    width: 100%;
+    justify-content: space-between; /* На мобильном ссылки растянутся по ширине */
+    gap: 0;
+  }
+}
 @media (max-width: 600px) {
     .title-second {
   white-space: nowrap;
