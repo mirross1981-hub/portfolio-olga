@@ -8,20 +8,22 @@ public_folder: "img"
 collections:
   - name: "works"
     label: "Кейсы"
-    format: "json"
-    file: "cases.json"
-    fields:
-      - label: "Кейсы"
-        name: "works"
-        widget: "list"
+    files:
+      - name: "cases"
+        label: "Все кейсы"
+        file: "cases.json"
         fields:
-          - { label: "Название", name: "title", widget: "string" }
-          - { label: "Теги", name: "tag", widget: "string" }
-          - { label: "Описание", name: "description", widget: "text" }
-          - { label: "Обложка", name: "cover", widget: "image" }
-          - label: "Экраны"
-            name: "screens"
+          - label: "Кейсы"
+            name: "works"
             widget: "list"
             fields:
-              - { label: "Картинка", name: "src", widget: "image" }
-              - { label: "Описание", name: "alt", widget: "string" }
+              - { label: "Название", name: "title", widget: "string" }
+              - { label: "Теги", name: "tag", widget: "string" }
+              - { label: "Описание", name: "description", widget: "text" }
+              - { label: "Обложка", name: "cover", widget: "image" }
+              - label: "Экраны"
+                name: "screens"
+                widget: "list"
+                fields:
+                  - { label: "Картинка", name: "src", widget: "image" }
+                  - { label: "Описание", name: "alt", widget: "string" }

@@ -108,7 +108,7 @@ fetch("cases.json")
     return response.json();
   })
   .then(function (data) {
-    works = data;
+    works = data.works;
     renderWorks();
   })
   .catch(function (error) {
