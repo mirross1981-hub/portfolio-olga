@@ -12,111 +12,6 @@ const caseTemplate = [
   { caption: "Результаты", text: "Заглушка: итоги и выводы." }
 ];
 
-/* --- Живой фон: мягкое «вспучивание» света под курсором --- */
-(function initAmbientBackground() {
-  const h1 = document.querySelector("h1");
-  const hero =
-    document.querySelector(".hero") ||
-    (h1 && h1.closest("section, header, main, div")) ||
-    document.querySelector("main") ||
-    document.querySelector("section");
-
-  if (!hero || hero === document.body || hero === document.documentElement) return;
-  if (hero.querySelector(".ambient-bg")) return;
-
-  const layer = document.createElement("div");
-  layer.className = "ambient-bg";
-  layer.setAttribute("aria-hidden", "true");
-  layer.innerHTML =
-    '<div class="ambient-aurora"></div>' +
-    '<div class="ambient-bulge"><div class="ambient-bulge-pulse"></div><div class="ambient-rim"></div></div>' +
-    '<div class="ambient-core"><div class="ambient-core-inner"></div></div>';
-
-  if (window.getComputedStyle(hero).position === "static") {
-    hero.style.position = "relative";
-  }
-  hero.style.overflow = "hidden";
-  hero.prepend(layer);
-
-  Array.prototype.forEach.call(hero.children, function (child) {
-    if (child !== layer) {
-      child.style.position = "relative";
-      child.style.zIndex = "1";
-    }
-  });
-
-  const bulge = layer.querySelector(".ambient-bulge");
-  const core = layer.querySelector(".ambient-core");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  let rect = hero.getBoundingClientRect();
-  let targetX = rect.width / 2;
-  let targetY = rect.height / 2;
-  let currentX = targetX;
-  let currentY = targetY;
-  let lastPointer = 0;
-  let rafId = null;
-
-  function measure() {
-    rect = hero.getBoundingClientRect();
-  }
-
-  window.addEventListener("resize", measure, { passive: true });
-  window.addEventListener("scroll", measure, { passive: true });
-
-  window.addEventListener("pointermove", function (event) {
-    const r = hero.getBoundingClientRect();
-    lastPointer = performance.now();
-    targetX = event.clientX - r.left;
-    targetY = event.clientY - r.top;
-  }, { passive: true });
-
-  function frame(now) {
-    // Если курсор давно не двигался — свет плавно дрейфует сам
-    if (now - lastPointer > 2500) {
-      const t = now * 0.00012;
-      targetX = rect.width * (0.5 + 0.22 * Math.sin(t * 1.3));
-      targetY = rect.height * (0.45 + 0.18 * Math.cos(t));
-    }
-
-    currentX += (targetX - currentX) * 0.075;
-    currentY += (targetY - currentY) * 0.075;
-
-    bulge.style.transform = "translate3d(" + currentX + "px," + currentY + "px,0)";
-    core.style.transform = "translate3d(" + currentX + "px," + currentY + "px,0)";
-
-    rafId = window.requestAnimationFrame(frame);
-  }
-
-  function start() {
-    if (rafId === null && !reduceMotion) {
-      rafId = window.requestAnimationFrame(frame);
-    }
-  }
-
-  function stop() {
-    if (rafId !== null) {
-      window.cancelAnimationFrame(rafId);
-      rafId = null;
-    }
-  }
-
-  if (reduceMotion) {
-    bulge.style.transform = "translate3d(" + rect.width / 2 + "px," + rect.height / 2 + "px,0)";
-    core.style.transform = "translate3d(" + rect.width / 2 + "px," + rect.height / 2 + "px,0)";
-  } else {
-    start();
-    document.addEventListener("visibilitychange", function () {
-      if (document.hidden) {
-        stop();
-      } else {
-        measure();
-        start();
-      }
-    });
-  }
-})();
-
 /* --- Иконки контактов: встроенные SVG, файлы картинок не нужны --- */
 const CONTACT_LINKS = [
   {
@@ -145,6 +40,7 @@ const CONTACT_LINKS = [
 function renderContactIcons() {
   let containers = document.querySelectorAll(".contact-icons");
 
+  // Если блока контактов нет в разметке — создаём его под подзаголовком
   if (containers.length === 0) {
     const created = document.createElement("div");
     created.className = "contact-icons";
@@ -196,8 +92,8 @@ function createCloseButton() {
   btn.setAttribute("data-close", "");
   btn.setAttribute("aria-label", "Закрыть кейс");
   btn.innerHTML =
-    '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">' +
-    '<path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>' +
+    '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">' +
+    '<path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>' +
     "</svg>";
 
   return btn;
@@ -206,7 +102,6 @@ function createCloseButton() {
 const closeButton = createCloseButton();
 popup.setAttribute("role", "dialog");
 popup.setAttribute("aria-modal", "true");
-popup.setAttribute("tabindex", "-1");
 
 function renderWorks() {
   list.innerHTML = "";
@@ -288,7 +183,7 @@ function openPopup(index) {
     popupContent.parentElement.scrollTop = 0;
   }
 
-  popup.focus({ preventScroll: true });
+  closeButton.focus({ preventScroll: true });
 }
 
 function closePopup() {
