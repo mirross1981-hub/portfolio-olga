@@ -12,9 +12,73 @@ const caseTemplate = [
   { caption: "Результаты", text: "Заглушка: итоги и выводы." }
 ];
 
+/* --- Иконки контактов: встроенные SVG, файлы картинок не нужны --- */
+const CONTACT_LINKS = [
+  {
+    href: "mailto:topol063@yandex.ru",
+    label: "Написать на почту",
+    title: "Почта",
+    external: false,
+    icon: '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7.5l8.5 6 8.5-6"/>'
+  },
+  {
+    href: "https://t.me/graph_design63",
+    label: "Telegram",
+    title: "Telegram",
+    external: true,
+    icon: '<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/>'
+  },
+  {
+    href: "https://max.ru/u/f9LHodD0cOK-HTAsB_203HeexzP4PxBQkBFhvsTClnofYxLRDEMAX9zfkRQ",
+    label: "Max",
+    title: "Max",
+    external: true,
+    icon: '<path d="M21 11.5c0 4.1-4 7.5-9 7.5-1 0-2-.1-2.9-.4L4 20l1.2-3.4C3.8 15.3 3 13.5 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5z"/>'
+  }
+];
+
+function renderContactIcons() {
+  let containers = document.querySelectorAll(".contact-icons");
+
+  // Если блока контактов нет в разметке — создаём его под подзаголовком
+  if (containers.length === 0) {
+    const created = document.createElement("div");
+    created.className = "contact-icons";
+    const anchor = document.querySelector(".hero-subtitle") || document.querySelector("h1");
+    if (anchor && anchor.parentElement) {
+      anchor.parentElement.append(created);
+    } else {
+      document.body.prepend(created);
+    }
+    containers = [created];
+  }
+
+  containers.forEach(function (container) {
+    container.innerHTML = "";
+
+    CONTACT_LINKS.forEach(function (contact) {
+      const link = document.createElement("a");
+      link.href = contact.href;
+      link.className = "icon-link";
+      link.setAttribute("aria-label", contact.label);
+      link.title = contact.title;
+      if (contact.external) {
+        link.target = "_blank";
+        link.rel = "noopener";
+      }
+      link.innerHTML =
+        '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' +
+        contact.icon +
+        "</svg>";
+      container.append(link);
+    });
+  });
+}
+
+renderContactIcons();
+
 /* --- Круглая кнопка закрытия с крестиком --- */
 function createCloseButton() {
-  // Удаляем старую текстовую кнопку «Закрыть», если она есть в разметке
   popup.querySelectorAll("button, a").forEach(function (el) {
     const text = (el.textContent || "").trim().toLowerCase();
     if (el.hasAttribute("data-close") || text.indexOf("закрыть") !== -1) {
@@ -72,7 +136,6 @@ function renderWorks() {
 function renderPopup(work) {
   popupContent.innerHTML = "";
 
-  // Шапка кейса: широкий фон, заголовок по центру, кнопка справа
   const header = document.createElement("div");
   header.className = "popup-header";
 
@@ -115,7 +178,6 @@ function openPopup(index) {
   popup.classList.add("is-open");
   document.body.style.overflow = "hidden";
 
-  // Каждый кейс открывается с начала
   popupContent.scrollTop = 0;
   if (popupContent.parentElement) {
     popupContent.parentElement.scrollTop = 0;
