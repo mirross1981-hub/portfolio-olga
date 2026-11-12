@@ -493,3 +493,189 @@ section,
     height: 48px;
   }
 }
+/* --- Шапка кейса и круглая кнопка закрытия --- */
+#popup .popup-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 104px;
+  padding: 28px 96px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, rgba(9, 28, 31, 0.97) 0%, rgba(13, 38, 41, 0.94) 100%);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(87, 213, 201, 0.22);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+#popup .popup-header .popup-title {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  font-family: "Oswald", "Arial Narrow", sans-serif;
+  font-size: clamp(20px, 2.6vw, 30px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+#popup .popup-header .popup-close-circle {
+  position: absolute;
+  top: 50%;
+  right: 28px;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #1d6a73;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transform: translateY(-50%) scale(0.5) rotate(-90deg);
+  pointer-events: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background-color 0.25s ease,
+              box-shadow 0.25s ease,
+              opacity 0.25s ease;
+}
+
+#popup.is-open .popup-header .popup-close-circle {
+  opacity: 1;
+  transform: translateY(-50%) scale(1) rotate(0deg);
+  pointer-events: auto;
+  animation: closeBtnIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s backwards;
+}
+
+@keyframes closeBtnIn {
+  from { opacity: 0; transform: translateY(-50%) scale(0.5) rotate(-90deg); }
+  to   { opacity: 1; transform: translateY(-50%) scale(1) rotate(0deg); }
+}
+
+#popup.is-open .popup-header .popup-close-circle:hover {
+  background: #27858f;
+  transform: translateY(-50%) scale(1.1) rotate(90deg);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+}
+
+#popup.is-open .popup-header .popup-close-circle:active {
+  transform: translateY(-50%) scale(0.92) rotate(90deg);
+}
+
+#popup .popup-header .popup-close-circle:focus-visible {
+  outline: 2px solid #57d5c9;
+  outline-offset: 3px;
+}
+
+/* Скроллбар попапа в цветах сайта */
+#popup, #popup * {
+  scrollbar-width: thin;
+  scrollbar-color: #1d6a73 rgba(255, 255, 255, 0.07);
+}
+#popup::-webkit-scrollbar, #popup *::-webkit-scrollbar { width: 10px; }
+#popup::-webkit-scrollbar-track, #popup *::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.07);
+}
+#popup::-webkit-scrollbar-thumb, #popup *::-webkit-scrollbar-thumb {
+  background: #1d6a73;
+  border-radius: 8px;
+}
+#popup::-webkit-scrollbar-thumb:hover, #popup *::-webkit-scrollbar-thumb:hover {
+  background: #27858f;
+}
+
+@media (max-width: 600px) {
+  #popup .popup-header {
+    min-height: 80px;
+    padding: 18px 64px;
+  }
+  #popup .popup-header .popup-title {
+    font-size: 18px;
+  }
+  #popup .popup-header .popup-close-circle {
+    right: 12px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #popup .popup-header .popup-close-circle,
+  #popup.is-open .popup-header .popup-close-circle {
+    animation: none;
+    transition: none;
+  }
+}
+/* --- Круглые иконки контактов (SVG) --- */
+.contact-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.contact-icons .icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #1d6a73;
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.contact-icons .icon-link svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.contact-icons .icon-link:hover {
+  background: #27858f;
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 0 4px rgba(87, 213, 201, 0.15);
+}
+
+.contact-icons .icon-link:active {
+  transform: translateY(-1px) scale(0.97);
+}
+
+.contact-icons .icon-link:focus-visible {
+  outline: 2px solid #57d5c9;
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .contact-icons {
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .contact-icons .icon-link {
+    width: 48px;
+    height: 48px;
+  }
+  .contact-icons .icon-link svg {
+    width: 22px;
+    height: 22px;
+  }
+}

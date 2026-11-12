@@ -12,6 +12,33 @@ const caseTemplate = [
   { caption: "Результаты", text: "Заглушка: итоги и выводы." }
 ];
 
+/* --- Круглая кнопка закрытия с крестиком --- */
+function createCloseButton() {
+  // Удаляем старую текстовую кнопку «Закрыть», если она есть в разметке
+  popup.querySelectorAll("button, a").forEach(function (el) {
+    const text = (el.textContent || "").trim().toLowerCase();
+    if (el.hasAttribute("data-close") || text.indexOf("закрыть") !== -1) {
+      el.remove();
+    }
+  });
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "popup-close-circle";
+  btn.setAttribute("data-close", "");
+  btn.setAttribute("aria-label", "Закрыть кейс");
+  btn.innerHTML =
+    '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">' +
+    '<path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>' +
+    "</svg>";
+
+  return btn;
+}
+
+const closeButton = createCloseButton();
+popup.setAttribute("role", "dialog");
+popup.setAttribute("aria-modal", "true");
+
 function renderWorks() {
   list.innerHTML = "";
 
@@ -45,9 +72,16 @@ function renderWorks() {
 function renderPopup(work) {
   popupContent.innerHTML = "";
 
+  // Шапка кейса: широкий фон, заголовок по центру, кнопка справа
+  const header = document.createElement("div");
+  header.className = "popup-header";
+
   const heading = document.createElement("h2");
+  heading.className = "popup-title";
   heading.textContent = work.title;
-  popupContent.append(heading);
+
+  header.append(heading, closeButton);
+  popupContent.append(header);
 
   const screens = work.screens && work.screens.length > 0 ? work.screens : caseTemplate;
 
@@ -60,6 +94,8 @@ function renderPopup(work) {
       const img = document.createElement("img");
       img.src = screen.src;
       img.alt = screen.alt || "";
+      img.loading = "lazy";
+      img.decoding = "async";
       item.append(img);
     } else {
       const caption = document.createElement("h3");
@@ -75,8 +111,17 @@ function renderPopup(work) {
 
 function openPopup(index) {
   renderPopup(works[index]);
+  popup.setAttribute("aria-label", works[index].title);
   popup.classList.add("is-open");
   document.body.style.overflow = "hidden";
+
+  // Каждый кейс открывается с начала
+  popupContent.scrollTop = 0;
+  if (popupContent.parentElement) {
+    popupContent.parentElement.scrollTop = 0;
+  }
+
+  closeButton.focus({ preventScroll: true });
 }
 
 function closePopup() {
