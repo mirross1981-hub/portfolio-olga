@@ -53,6 +53,10 @@ h1 {
   color: #ffffff;
 }
 
+.title-light {
+  font-weight: 300; /* Лёгкое начертание */
+}
+
 .hero-subtitle {
   font-size: clamp(16px, 2vw, 20px);
   color: rgba(255, 255, 255, 0.75);
