@@ -1,77 +1,67 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><h1>Ольга Савченко — <span class="title-second">UI/UX-дизайнер</span></h1></title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ольга Савченко — UI/UX Дизайн</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  </header>
 
-    <main>
-        <section class="hero" id="about">
-            <div class="hero-main">
-                <h1>Ольга Савченко — UI/UX-дизайнер</h1>
-                <p>   Создаем функциональный и эстетичный UX/UI дизайн для сайтов, сервисов и мобильных приложений, который помогает решать бизнес-задачи и повышать конверсию</p>
-                <div class="contact-icons">
-     <a href="mailto:topol063@yandex.ru" class="icon-link">
-       <img src="img/icon-mail.png" alt="Написать на почту">
-     </a>
-     <a href="https://t.me/graph_design63" target="_blank" class="icon-link">
-       <img src="img/icon-telegram.png" alt="Telegram">
-     </a>
-     <a href="https://max.ru/u/f9LHodD0cOK-HTAsB_203HeexzP4PxBQkBFhvsTClnofYxLRDEMAX9zfkRQ" target="_blank" class="icon-link">
-       <img src="img/icon-max.png" alt="Max">
-     </a>
-   </div>
-            </div>
-            <aside class="hero-side">
-                <nav class="panel panel-nav">
-                </nav>
-
-            </aside>
-        </section>
-        <section class="works" id="works">
-            <div id="works-list"></div>
-        </section>
-
-        <section class="cta" id="cta">
-            <h2>Нужен сайт?</h2>
-            <p>Напишите — обсудим задачу, сроки и формат работы.</p>
-            <div class="contact-icons">
-  <a href="mailto:topol063@yandex.ru" class="icon-link" aria-label="Написать на почту" title="Почта">
-    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-      <rect x="3" y="5" width="18" height="14" rx="2.5"/>
-      <path d="M3.5 7.5l8.5 6 8.5-6"/>
-    </svg>
-  </a>
-  <a href="https://t.me/graph_design63" target="_blank" rel="noopener" class="icon-link" aria-label="Telegram" title="Telegram">
-    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-      <path d="M22 2L11 13"/>
-      <path d="M22 2l-7 20-4-9-9-4 20-7z"/>
-    </svg>
-  </a>
-  <a href="https://max.ru/u/f9LHodD0cOK-HTAsB_203HeexzP4PxBQkBFhvsTClnofYxLRDEMAX9zfkRQ" target="_blank" rel="noopener" class="icon-link" aria-label="Max" title="Max">
-    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-      <path d="M21 11.5c0 4.1-4 7.5-9 7.5-1 0-2-.1-2.9-.4L4 20l1.2-3.4C3.8 15.3 3 13.5 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5z"/>
-    </svg>
-  </a>
-</div>
-        </section>
-        <footer class="footer">
-            <p>© 2026 Ольга Савченко</p>
-        </footer>
-        <div class="popup" id="popup">
-            <div class="popup-overlay" data-close></div>
-            <div class="popup-window">
-                <button class="popup-close" type="button" data-close>Закрыть</button>
-                <div class="popup-content" id="popup-content"></div>
-            </div>
+  <main>
+    <!-- Hero секция -->
+    <section class="hero">
+      <div class="hero-content fade-in-up">
+        <h1>ОЛЬГА САВЧЕНКО<br>UI/UX-ДИЗАЙНЕР</h1>
+        <p class="hero-subtitle">Создаю функциональный и эстетичный UX/UI дизайн для сайтов, сервисов и мобильных приложений, который помогает решать бизнес-задачи и повышать конверсию</p>
+        
+        <div class="hero-counter fade-in-up">
+          <span class="counter-number" id="project-count">0</span>
+          <span class="counter-label">реализованных проектов</span>
         </div>
-        <script src="script.js"></script>
+
+        <div class="contact-icons fade-in-up"></div>
+      </div>
+    </section>
+
+    <!-- Секция работ -->
+    <section class="works" id="works">
+      <div class="container">
+        <div id="works-list" class="works-grid">
+          <!-- Кейсы рендерятся через JS -->
+        </div>
+        <div class="works-footer">
+          <button id="show-more-btn" class="show-more-btn" hidden>Показать ещё</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Футер -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <p class="footer-name">ОЛЬГА САВЧЕНКО</p>
+        <p class="footer-copy">© 2024 Все права защищены</p>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:topol063@yandex.ru" class="footer-link">topol063@yandex.ru</a>
+        <a href="https://t.me/graph_design63" target="_blank" rel="noopener" class="footer-link">Telegram</a>
+        <a href="https://max.ru/u/f9LHodD0cOK-HTAsB_203HeexzP4PxBQkBFhvsTClnofYxLRDEMAX9zfkRQ" target="_blank" rel="noopener" class="footer-link">Max</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Попап кейса -->
+  <div id="popup" class="popup">
+    <div class="popup-inner">
+      <div id="popup-content" class="popup-content"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
